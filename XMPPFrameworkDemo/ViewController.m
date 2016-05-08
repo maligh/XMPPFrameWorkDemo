@@ -9,9 +9,7 @@
 #import "ViewController.h"
 #import "MLXMPPManager.h"
 
-@interface ViewController () {
-    UIButton *sendButton;
-}
+@interface ViewController ()
 
 @end
 
@@ -22,7 +20,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self configXMPP];
-    [self configUI];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -53,21 +50,15 @@
     NSLog(@"你收到了群聊消息:%@",content);
 }
 
-#pragma mark - ****************  Private M
-
-- (void)configUI {
-    if (!sendButton) {
-        sendButton = [UIButton new];
-        sendButton.frame = CGRectMake(200, 200, 100, 100);
-        sendButton.backgroundColor = [UIColor blackColor];
-        [sendButton addTarget:self action:@selector(sendButtonClicked) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:sendButton];
-    }
-}
+#pragma mark - ****************  Private Methods
 
 - (void)sendButtonClicked {
     NSString *message = @"你好，我是程序员";
     [[MLXMPPManager sharedManager] sendToGroupWithMessage:message];
+}
+
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [self sendButtonClicked];
 }
 
 @end
